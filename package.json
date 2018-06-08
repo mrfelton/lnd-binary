@@ -1,0 +1,58 @@
+{
+  "name": "lnd-binary",
+  "version": "0.1.0-beta.1",
+  "description": "Install lnd from npm https://github.com/lightningnetwork/lnd",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Warning: no test specified\"",
+    "postinstall": "go-npm install",
+    "preuninstall": "go-npm uninstall"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrfelton/lnd-binary"
+  },
+  "author": "Tom Kirkpatrick <tkp@kirkdesigns.co.uk> (https://github.com/mrfelton)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrfelton/lnd-binary/issues"
+  },
+  "keywords": [
+    "bitcoin",
+    "lightningnetwork",
+    "lnd"
+  ],
+  "homepage": "https://github.com/mrfelton/lnd-binary#readme",
+  "goBinary": {
+    "name": "lnd",
+    "path": "./bin",
+    "version": "0.4-beta",
+    "tarOptions": {
+      "strip": 1
+    },
+    "checksums": {
+      "lnd-darwin-386-v0.4-beta.tar.gz": "db811b2c94288d50f1709508c72a35d1893b31fdfb54b2e19a4a65c92f32c581",
+      "lnd-darwin-amd64-v0.4-beta.tar.gz": "bcf7813522d9461f27e47ee7879d00ebf45002ad497a1907c7a4312ee3800f0b",
+      "lnd-freebsd-386-v0.4-beta.tar.gz": "d75a52a695fabee8c18fd8880120b86e891a1689c51fabd5a947584824223284",
+      "lnd-freebsd-amd64-v0.4-beta.tar.gz": "86db36bf033e1237ea778f2ba6dbf82b750a2524796e3240803855db941ed8eb",
+      "lnd-freebsd-arm-v0.4-beta.tar.gz": "43df7ec2eda8e754374b9065259afac360a57bf6c6698b5103aa137061616bbc",
+      "lnd-linux-386-v0.4-beta.tar.gz": "fbda15e493fcf4e187a15852b3ae686cc0df2abdf91c846fcaef3e74df2d5c64",
+      "lnd-linux-amd64-v0.4-beta.tar.gz": "dd781604c1f946414c0b053e6ae71b323556dbe4ff87f59408b6b13993e8d688",
+      "lnd-linux-arm-v0.4-beta.tar.gz": "be5d855d0ddb4db6db9861e86abd01c227ac892dd0cab8dd3610ff12287035a4",
+      "lnd-linux-arm64-v0.4-beta.tar.gz": "8e04d769c903805a20bafb79ae38ef50b0b98261b79e31ccc99edf5e41306446",
+      "lnd-linux-mips64-v0.4-beta.tar.gz": "6e0d73c5f63a7500109945787121a479197b6c6af6593a9fabd4286f27d980af",
+      "lnd-linux-mips64le-v0.4-beta.tar.gz": "f5e0eb6489346a649dbc85cf69872d6c1fe3c3e3c957d8487529734144b8f0bb",
+      "lnd-linux-ppc64-v0.4-beta.tar.gz": "ca6a99fce87afb9d542d299bd50d957846679840ddf00e1be137ce9bc281622a",
+      "lnd-netbsd-386-v0.4-beta.tar.gz": "021814819002fb004cfe302c17fded9597567feaf38ee92ad8d7c07bebd8eb25",
+      "lnd-netbsd-amd64-v0.4-beta.tar.gz": "e94aeb38b7d7124b29bb6628b28b752d650baa68e3247392294dc4700d208059",
+      "lnd-openbsd-386-v0.4-beta.tar.gz": "a985e6ece98e6eb4d5170ca232517374625e29146946d36bc6f168f30f39c556",
+      "lnd-openbsd-amd64-v0.4-beta.tar.gz": "3c7889892a205f7734be9b1c5fa832e0e9c14c29eec30019a026c1907e0a6112",
+      "lnd-windows-386-v0.4-beta.zip": "d039c371d01bf788d26cb2876ceafcb21f40f705c98bb0b0b9cf6558cac4ca23",
+      "lnd-windows-amd64-v0.4-beta.zip": "1245abe9adeb2fab74fe57d62b6d8c09d30b9ada002cd95868a33406e5a14796"
+    },
+    "url": "https://github.com/lightningnetwork/lnd/releases/download/v{{version}}/lnd-{{platform}}-{{arch}}-v{{version}}.tar.gz"
+  },
+  "dependencies": {
+    "@mrfelton/go-npm": "0.2.0-beta.1"
+  }
+}
