@@ -20,7 +20,7 @@
 npm install lnd-binary --save
 ```
 
-See [lnd getting-started](https://github.com/lightningnetwork/lnd).
+See [lnd getting started](https://github.com/lightningnetwork/lnd).
 
 ## Usage
 
@@ -29,8 +29,6 @@ See [lnd getting-started](https://github.com/lightningnetwork/lnd).
 > npx lnd --version
 lnd version 0.4.2-beta
 ```
-
-See [LND getting-started](hhttps://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md).
 
 ## Development
 
@@ -65,10 +63,6 @@ As local or global [.npmrc](https://docs.npmjs.com/misc/config) configuration fi
 As a process argument:
 
 * E.g. `npm install lnd-binary --lnd-binary-site=http://example.com/`
-
-### API
-
-For programmatic usage, see [scripts/install.js](scripts/install.js).
 
 ## License
 
