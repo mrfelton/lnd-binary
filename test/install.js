@@ -8,7 +8,7 @@ const goenv = require('go-platform')
 const pkg = require('./../package.json')
 const checkAndDownloadBinary = require('../scripts/install').checkAndDownloadBinary
 
-const version = 'v' + pkg.lndBinaryConfig.binaryVersion
+const version = 'v0.4.2-beta'
 const dir = path.resolve(__dirname, '..', 'vendor')
 
 test('Ensure lnd gets downloaded (current version and platform)', (t) => {
