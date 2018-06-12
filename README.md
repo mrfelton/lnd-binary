@@ -42,37 +42,29 @@ By default, the latest supported lnd release will be installed. Alternatively, a
 
 ### Configuration
 
-When used via `node ./bin/lnd-install`, you can specify the target platform, version, architecture, and installation path via environment variables:
+lnd-binary supports different configuration parameters to change settings related to the lnd binary such as binary name, binary path or alternative download path. Following parameters are supported by lnd-binary:
 
-`LND_BINARY_PLATFORM`
+Variable name       | .npmrc parameter    | Process argument   | Value
+--------------------|---------------------|--------------------|------
+LND_BINARY_NAME     | lnd_binary_name     | --lnd-binary-name     | String
+LND_BINARY_SITE     | lnd_binary_site     | --lnd-binary-site     | URL
+LND_BINARY_PATH     | lnd_binary_path     | --lnd-binary-path     | Path
+LND_BINARY_DIR      | lnd_binary_dir      | --lnd-binary-dir      | Path
+LND_BINARY_PLATFORM | lnd_binary_platform | --lnd-binary-platform | See: [Supported Platforms](lib/check-support.js#L4)
+LND_BINARY_ARCH     | lnd_binary_arch     | --lnd-binary-arch     | See: [Supported Architectures](lib/check-support.js#L5)
+LND_BINARY_VERSION  | lnd_binary_version  | --lnd-binary-version  | See: [Supported Versions](lib/check-support.js#L6)
 
-See: [Supported Platforms](lib/check-support.js#L4) for possible values.
+These parameters can be used as environment variable:
 
-`LND_BINARY_ARCH`
+* E.g. `export LND_BINARY_SITE=http://example.com/`
 
-See: [Supported Architectures](lib/check-support.js#L5) for possible values.
+As local or global [.npmrc](https://docs.npmjs.com/misc/config) configuration file:
 
-`LND_BINARY_VERSION`
+* E.g. `lnd_binary_site=http://example.com/`
 
-See: [Supported Versions](lib/check-support.js#L6) for possible values.
+As a process argument:
 
-`LND_BINARY_DIR`
-
-Defaults to the `./vendor` directory in this package.
-
-Or via command line arguments:
-```
-node ./bin/lnd-install \
-  --lnd-binary-version <version> \
-  --lnd-binary-platform <platform> \
-  --lnd-binary-arch <architecture> \
-  --lnd-binary-dir <install directory>
-```
-
-eg.
-```
-node ./bin/lnd-install` --lnd-binary-version v0.4.2-beta --lnd-binary-platform linux --lnd-binary-arch amd64 --lnd-binary-dir ./resources
-```
+* E.g. `npm install lnd-binary --lnd-binary-site=http://example.com/`
 
 ### API
 

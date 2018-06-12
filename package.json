@@ -23,7 +23,8 @@
   ],
   "lndBinaryConfig": {
     "binarySite": "https://github.com/lightningnetwork/lnd/releases/download",
-    "binaryVersion": "0.4.2-beta"
+    "binaryVersion": "0.4.2-beta",
+    "binaryDir": "./vendor"
   },
   "bin": {
     "lnd": "./bin/lnd",

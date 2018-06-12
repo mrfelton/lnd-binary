@@ -7,6 +7,7 @@ var fs = require('fs'),
   mkdir = require('mkdirp'),
   path = require('path'),
   lnd = require('../lib/extensions'),
+  support = require('../lib/check-support'),
   request = require('request'),
   gunzip = require('gunzip-maybe'),
   tarFS = require('tar-fs'),
@@ -61,7 +62,7 @@ function download(url, dest, cb) {
         console.log('Unpacking binary to', tmpDir)
 
         // TODO: handle errors for both cases
-        if (lnd.isWindows(lnd.getBinaryPlatform())) {
+        if (support.isWindows(lnd.getBinaryPlatform())) {
           return stream.pipe(
             unzip
               .Extract({ path: tmpDir })
@@ -76,8 +77,8 @@ function download(url, dest, cb) {
                   if (mode !== st.mode) {
                     fs.chmodSync(downloadedBinary, mode)
                   }
-                } catch (e) {
-                  console.error(e)
+                } catch (error) {
+                  console.error(error)
                   // Just ignore error if we don't have permission.
                   // We did our best. Likely because phantomjs was already installed.
                 }
@@ -155,6 +156,19 @@ function checkAndDownloadBinary(cb) {
     return;
   }
 
+  //Environment Variables || Args || Defaults
+  version = lnd.getBinaryVersion()
+  platform = lnd.getBinaryPlatform()
+  arch = lnd.getBinaryArch()
+
+  // Make sure we support the requested package
+  try {
+    support.verify(version, platform, arch)
+  } catch (err) {
+    console.error(err.message)
+    return cb(err)
+  }
+
   var cachedBinary = lnd.getCachedBinary(),
     cachePath = lnd.getBinaryCachePath(),
     binaryPath = lnd.getBinaryPath();
@@ -168,7 +182,7 @@ function checkAndDownloadBinary(cb) {
     mkdir.sync(path.dirname(binaryPath));
   } catch (err) {
     const error = new Error('Unable to save binary', path.dirname(binaryPath), ':', err);
-    console.error(error)
+    console.error(error.message)
     return cb(error);
   }
 
@@ -184,7 +198,7 @@ function checkAndDownloadBinary(cb) {
   download(lnd.getBinaryUrl(), binaryPath, function(err) {
     if (err) {
       console.error(err);
-      return;
+      return cb(err)
     }
 
     console.log('Binary saved to', binaryPath);
