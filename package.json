@@ -21,11 +21,6 @@
     "test",
     "vendor"
   ],
-  "lndBinaryConfig": {
-    "binarySite": "https://github.com/lightningnetwork/lnd/releases/download",
-    "binaryVersion": "0.4.2-beta",
-    "binaryDir": "./vendor"
-  },
   "bin": {
     "lnd": "./bin/lnd",
     "lnd-install": "./bin/lnd-install"
@@ -40,6 +35,7 @@
   },
   "dependencies": {
     "cacache": "^11.0.2",
+    "find-config": "^1.0.0",
     "go-platform": "^1.0.0",
     "gunzip-maybe": "^1.4.1",
     "mkdirp": "^0.5.1",
