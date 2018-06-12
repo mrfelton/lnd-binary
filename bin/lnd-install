@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+/**
+ * Script that will install lnd.
+ */
+
+var path = require('path')
+
+require(path.join(__dirname, '..', 'scripts', 'install'))

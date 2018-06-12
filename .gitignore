@@ -66,5 +66,5 @@ typings/
 # Serverless directories
 .serverless
 
-# Temporary binary folder
-/bin
+# Vendor binaries
+/vendor

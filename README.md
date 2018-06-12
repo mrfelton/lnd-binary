@@ -8,24 +8,19 @@
 
 ## Table of Contents
 
-- [Install](#install)
+- [Installation](#installation)
 - [Usage](#usage)
 - [Development](#development)
-  - [Publish a new version](#publish-a-new-version)
-- [Contribute](#contribute)
 - [License](#license)
 
-## Install
 
-Install the latest [lnd](https://github.com/lightningnetwork/lnd) binary.
+## Installation
 
 ```
-npm install lnd
+npm install lnd-binary --save
 ```
 
-Downloads the relevant precompiled lnd binary for your system from [https://github.com/lightningnetwork/lnd](https://github.com/lightningnetwork/lnd).
-
-After downloading, this package will re-calculate the sha256 sum of the downloaded binary, and compare that with the from the hashes from lnd manifest file in order to ensure the integrity of the installed lnd binary.
+See [lnd getting-started](https://github.com/lightningnetwork/lnd).
 
 ## Usage
 
@@ -37,47 +32,51 @@ lnd version 0.4.2-beta
 
 See [LND getting-started](hhttps://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md).
 
-Note: this package installs the corresponding version of lnd that matches the version of this package that you have installed.
+## Development
 
-### Publish a new version
+The lnd binary gets installed into the `vendor` directory inside the module folder.
 
-1. First, (in package.json) you should Update the `goBinary.version` property to reference the new lnd version.
+### Which lnd version this package downloads?
 
-2. Next, (in package.json) you should list out all checksums for the release assets that are available as part of the new release (those listed on https://github.com/lightningnetwork/lnd/releases).
+By default, the latest supported lnd release will be installed. Alternatively, a specific version can be specified with the configuration options below.
 
-3. Use [np](https://github.com/sindresorhus/np) to do a release (release version number should match the lnd version number).
+### Configuration
 
-```sh
-> npx np 0.4.3-beta
+When used via `node ./bin/lnd-install`, you can specify the target platform, version, architecture, and installation path via environment variables:
+
+`LND_BINARY_PLATFORM`
+
+See: [Supported Platforms](lib/check-support.js#L4) for possible values.
+
+`LND_BINARY_ARCH`
+
+See: [Supported Architectures](lib/check-support.js#L5) for possible values.
+
+`LND_BINARY_VERSION`
+
+See: [Supported Versions](lib/check-support.js#L6) for possible values.
+
+`LND_BINARY_DIR`
+
+Defaults to the `./vendor` directory in this package.
+
+Or via command line arguments:
+```
+node ./bin/lnd-install \
+  --lnd-binary-version <version> \
+  --lnd-binary-platform <platform> \
+  --lnd-binary-arch <architecture> \
+  --lnd-binary-dir <install directory>
 ```
 
-This will:
+eg.
+```
+node ./bin/lnd-install` --lnd-binary-version v0.4.2-beta --lnd-binary-platform linux --lnd-binary-arch amd64 --lnd-binary-dir ./resources
+```
 
-- `git tag` the release
-- push to https://github.com/mrfelton/lnd-binary
-- publish to `lnd-binary@$version` to https://npmjs.com/package/lnd-binary
+### API
 
-Open an issue in the repo if you run into trouble.
-
-### Publish a new version of this module with exact same lnd version
-
-If some problem happens, and you need to publish a new version of this module targetting _the same_ lnd version, then please follow this convention:
-
-1. **Clean up bad stuff:** unpublish all modules with this exact same `<lnd-version>`
-2. **Add a "update" version suffix:** use version: `<lnd-version>-update<num>`
-3. **Publish version:** publish the module. Since it's the only one with the lnd version, then it should be installed.
-
-> Why do this?
-
-Well, if you previously published npm module `lnd-binary@0.4.3-beta` and there was a problem, we now must publish a different version, but we want to keep the version number the same. so the strategy is to publish as `lnd-binary@0.4.3-beta-update.1`, and unpublish `lnd-binary@0.4.3-beta`.
-
-> Why `-update.<num>`?
-
-Because it is unlikely to be a legitimate lnd version, and we want to support lnd versions like `featureset-1` etc.
-
-## Contribute
-
-Feel free to join in. All welcome. Open an [issue](https://github.com/mrfelton/lnd-binary/issues)!
+For programmatic usage, see [scripts/install.js](scripts/install.js).
 
 ## License
 
