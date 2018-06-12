@@ -1,6 +1,6 @@
 {
   "name": "lnd-binary",
-  "version": "0.0.1-beta.2",
+  "version": "0.1.0",
   "description": "Download the latest lnd binary",
   "main": "./bin/lnd",
   "engines": {
