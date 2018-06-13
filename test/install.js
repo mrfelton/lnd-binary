@@ -10,7 +10,7 @@ const checkAndDownloadBinary = require('../scripts/install').checkAndDownloadBin
 const version = 'v0.4.2-beta'
 const dir = path.resolve(__dirname, '..', 'vendor')
 
-test('Ensure lnd gets downloaded (current version and platform)', (t) => {
+test('Ensure lnd gets downloaded (current version and platform)', t => {
   t.plan(5)
   rimraf.sync(dir)
   checkAndDownloadBinary((err, res) => {
@@ -25,7 +25,7 @@ test('Ensure lnd gets downloaded (current version and platform)', (t) => {
   })
 })
 
-test('Ensure Windows version gets downloaded', (t) => {
+test('Ensure Windows version gets downloaded', t => {
   t.plan(7)
   rimraf.sync(dir)
   process.env.LND_BINARY_PLATFORM = 'windows'
@@ -47,7 +47,7 @@ test('Ensure Windows version gets downloaded', (t) => {
   })
 })
 
-test('Ensure Linux version gets downloaded', (t) => {
+test('Ensure Linux version gets downloaded', t => {
   t.plan(7)
   rimraf.sync(dir)
   process.env.LND_BINARY_PLATFORM = 'linux'
@@ -69,7 +69,7 @@ test('Ensure Linux version gets downloaded', (t) => {
   })
 })
 
-test('Ensure OSX version gets downloaded', (t) => {
+test('Ensure OSX version gets downloaded', t => {
   t.plan(7)
   rimraf.sync(dir)
   process.env.LND_BINARY_PLATFORM = 'darwin'

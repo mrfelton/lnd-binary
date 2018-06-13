@@ -12,14 +12,14 @@ const userAgent = require('./useragent')
  * @return {Object} an options object for request
  * @api private
  */
-module.exports = function () {
+module.exports = function() {
   var options = {
     rejectUnauthorized: false,
     timeout: 60000,
     headers: {
-      'User-Agent': userAgent()
+      'User-Agent': userAgent(),
     },
-    encoding: null
+    encoding: null,
   }
 
   var proxyConfig = proxy()

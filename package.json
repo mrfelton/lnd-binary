@@ -11,7 +11,7 @@
     "install": "node scripts/install.js",
     "prepublishOnly": "node scripts/prepublish.js",
     "test": "tape test/*.js | tap-spec",
-    "lint": "standard"
+    "lint": "prettier-eslint --write \"./**/*.{js,json,md}\""
   },
   "files": [
     "bin",
@@ -60,7 +60,11 @@
   },
   "homepage": "https://github.com/mrfelton/lnd-binary",
   "devDependencies": {
-    "standard": "^11.0.1",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "prettier": "^1.13.5",
+    "prettier-eslint": "^8.8.1",
+    "prettier-eslint-cli": "^4.7.1",
     "tap-spec": "^5.0.0",
     "tape": "^4.9.0"
   }
