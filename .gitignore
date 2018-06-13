@@ -68,3 +68,6 @@ typings/
 
 # Vendor binaries
 /vendor
+
+# Transpiled code
+/dist

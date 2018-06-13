@@ -1,17 +1,11 @@
-/*!
- * node-lnd: lib/extensions.js
- */
-
-const eol = require('os').EOL
-const os = require('os')
-const fs = require('fs')
-const pkg = require('../package.json')
-const support = require('./support')
-const config = require('./config')
-const mkdir = require('mkdirp')
-const path = require('path')
-const goenv = require('go-platform')
-const trueCasePathSync = require('true-case-path')
+import fs from 'fs-extra'
+import path from 'path'
+import goenv from 'go-platform'
+import trueCasePathSync from 'true-case-path'
+import { tmpdir } from 'os'
+import support from './support'
+import { config } from './config'
+import * as pkg from '../../package.json'
 
 /**
  * Get the value of a CLI argument
@@ -228,7 +222,7 @@ function getBinaryDir() {
   } else if (config && config.binaryDir) {
     binaryDir = config.binaryDir
   } else {
-    binaryDir = path.join(__dirname, '..', 'vendor')
+    binaryDir = path.join(__dirname, '..', '..', 'vendor')
   }
 
   return path.resolve(binaryDir)
@@ -293,7 +287,7 @@ function getCachePathCandidates() {
  * @api public
  */
 function getTmpDir() {
-  return process.env.npm_config_tmp || os.tmpdir()
+  return process.env.npm_config_tmp || tmpdir()
 }
 
 /**
@@ -315,7 +309,7 @@ function getBinaryCachePath() {
     cachePath = path.join(cachePathCandidates[i], pkg.name, getBinaryVersion())
 
     try {
-      mkdir.sync(cachePath)
+      fs.ensureDirSync(cachePath)
       return cachePath
     } catch (e) {
       // Directory is not writable, try another
@@ -354,27 +348,6 @@ function getCachedBinary() {
 }
 
 /**
- * Does the supplied binary path exist
- *
- * @param {String} binaryPath
- * @api public
- */
-
-function hasBinary(binaryPath) {
-  return fs.existsSync(binaryPath)
-}
-
-/**
- * Get LND version information
- *
- * @api public
- */
-
-function getVersionInfo(binding) {
-  return [['node-lnd', getBinaryVersion(), '(Wrapper)', '[JavaScript]'].join('\t')].join(eol)
-}
-
-/**
  * Gets the platform variant, currently either an empty string or 'musl' for Linux/musl platforms.
  *
  * @api public
@@ -404,18 +377,19 @@ function getPlatformVariant() {
   return ''
 }
 
-module.exports.hasBinary = hasBinary
-module.exports.getBinaryUrl = getBinaryUrl
-module.exports.getBinaryName = getBinaryName
-module.exports.getBinaryVersion = getBinaryVersion
-module.exports.getBinaryPlatform = getBinaryPlatform
-module.exports.getBinaryArch = getBinaryArch
-module.exports.getBinaryFileExtension = getBinaryFileExtension
-module.exports.getBinaryExtension = getBinaryExtension
-module.exports.getBinaryDir = getBinaryDir
-module.exports.getBinaryPath = getBinaryPath
-module.exports.getBinaryCachePath = getBinaryCachePath
-module.exports.getCachedBinary = getCachedBinary
-module.exports.getCachePathCandidates = getCachePathCandidates
-module.exports.getVersionInfo = getVersionInfo
-module.exports.getTmpDir = getTmpDir
+// Public API
+export default {
+  getBinaryUrl,
+  getBinaryName,
+  getBinaryPlatform,
+  getBinaryArch,
+  getBinaryVersion,
+  getBinaryFileExtension,
+  getBinaryExtension,
+  getBinaryDir,
+  getBinaryPath,
+  getBinaryCachePath,
+  getCachedBinary,
+  getCachePathCandidates,
+  getTmpDir,
+}

@@ -1,6 +1,8 @@
 package.json
 package-lock.json
 .git
+.eslintrc
+.babelrc
 node_modules
 coverage
 vendor

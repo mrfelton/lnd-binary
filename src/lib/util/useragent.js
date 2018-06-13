@@ -1,10 +1,10 @@
-var pkg = require('../../package.json')
+import * as pkg from '../../../package.json'
 
 /**
  * A custom user agent use for binary downloads.
  *
  * @api private
  */
-module.exports = function() {
+export const useragent = function() {
   return ['node/', process.version, ' ', 'node-lnd-installer/', pkg.version].join('')
 }

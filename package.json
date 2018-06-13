@@ -2,28 +2,30 @@
   "name": "lnd-binary",
   "version": "0.2.1",
   "description": "Download the latest lnd binary",
-  "main": "./bin/lnd",
+  "main": "./dist/bin/lnd",
   "engines": {
     "node": ">=6.0.0",
     "npm": ">=4.0.0"
   },
   "scripts": {
-    "install": "node scripts/install.js",
-    "prepublishOnly": "node scripts/prepublish.js",
-    "test": "tape test/*.js | tap-spec",
-    "lint": "prettier-eslint --write \"./**/*.{js,json,md}\""
+    "install": "node ./dist/bin/lnd-install",
+    "test": "babel-tape-runner test/*.js | tap-spec",
+    "lint": "prettier-eslint --write \"./**/*.{js,json,md}\"",
+    "build-src": "babel src --out-dir dist",
+    "build-lnd-bin": "mkdir -p dist/bin && babel src/bin/lnd --out-file dist/bin/lnd  && chmod +xx dist/bin/lnd",
+    "build-lnd-install-bin": "mkdir -p dist/bin && babel src/bin/lnd-install --out-file dist/bin/lnd-install && chmod +xx dist/bin/lnd-install",
+    "build": "npm run build-src && npm run build-lnd-bin && npm run build-lnd-install-bin",
+    "preversion": "npm test",
+    "prepack": "npm run build"
   },
   "files": [
     "bin",
-    "lib",
-    "scripts",
-    "src",
-    "test",
-    "vendor"
+    "dist",
+    "lib"
   ],
   "bin": {
-    "lnd": "./bin/lnd",
-    "lnd-install": "./bin/lnd-install"
+    "lnd": "./dist/bin/lnd",
+    "lnd-install": "./dist/bin/lnd-install"
   },
   "pre-push": [
     "lint",
@@ -38,12 +40,11 @@
     "cacache": "^11.0.2",
     "debug": "^3.1.0",
     "find-config": "^1.0.0",
+    "fs-extra": "^6.0.1",
     "go-platform": "^1.0.0",
     "gunzip-maybe": "^1.4.1",
     "hasha": "^3.0.0",
-    "mkdirp": "^0.5.1",
     "npmlog": "^4.1.2",
-    "rimraf": "^2.6.2",
     "tar-fs": "^1.16.2",
     "true-case-path": "^1.0.2",
     "unzip-stream": "^0.3.0"
@@ -60,12 +61,18 @@
   },
   "homepage": "https://github.com/mrfelton/lnd-binary",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "babel-tape-runner": "^2.0.1",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "prettier": "^1.13.5",
     "prettier-eslint": "^8.8.1",
     "prettier-eslint-cli": "^4.7.1",
     "tap-spec": "^5.0.0",
-    "tape": "^4.9.0"
+    "tape": "^4.9.0",
+    "tape-promise": "^3.0.0"
   }
 }

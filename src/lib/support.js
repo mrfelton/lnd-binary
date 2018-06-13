@@ -1,5 +1,3 @@
-'use strict'
-
 // The packages we support
 const supportedPlatforms = ['linux', 'darwin', 'windows', 'freebsd']
 const supportedArchs = ['amd64', '386', 'arm']
@@ -33,7 +31,7 @@ function verify(version, platform, arch) {
 }
 
 // Public API
-module.exports = {
+export default {
   Versions: supportedVersions,
   Platforms: supportedPlatforms,
   Archs: supportedArchs,
