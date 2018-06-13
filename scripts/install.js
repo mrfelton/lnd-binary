@@ -2,35 +2,33 @@
  * node-lnd: scripts/install.js
  */
 
-var fs = require('fs'),
-  eol = require('os').EOL,
-  mkdir = require('mkdirp'),
-  path = require('path'),
-  lnd = require('../lib/extensions'),
-  support = require('../lib/support'),
-  manifest = require('../lib/manifest'),
-  axios = require('axios'),
-  debug = require('debug')('lnd-binary'),
-  gunzip = require('gunzip-maybe'),
-  tar = require('tar-fs'),
-  unzip = require('unzip-stream'),
-  log = require('npmlog'),
-  cacache = require('cacache'),
-  hasha = require('hasha'),
-  downloadOptions = require('./util/downloadoptions'),
-  pkg = require('../package.json');
+const fs = require('fs')
+const mkdir = require('mkdirp')
+const path = require('path')
+const lnd = require('../lib/extensions')
+const support = require('../lib/support')
+const manifest = require('../lib/manifest')
+const axios = require('axios')
+const debug = require('debug')('lnd-binary')
+const gunzip = require('gunzip-maybe')
+const tar = require('tar-fs')
+const unzip = require('unzip-stream')
+const log = require('npmlog')
+const cacache = require('cacache')
+const hasha = require('hasha')
+const pkg = require('../package.json')
 
 // Download or fecth binary archive from cache.
 const fetch = (url, dest) => {
   debug('fetch: %o', { url, dest })
 
-    log.info(pkg.name,'Downloading', url)
+  log.info(pkg.name, 'Downloading', url)
 
-    return axios({
-      method:'get',
-      url,
-      responseType:'stream'
-    })
+  return axios({
+    method: 'get',
+    url,
+    responseType: 'stream'
+  })
     .then((response) => {
       // return a promise and resolve when download finishes
       return new Promise((resolve, reject) => {
@@ -43,10 +41,10 @@ const fetch = (url, dest) => {
         // been explicitly set it's `undefined` which is considered
         // as far as npm is concerned.
         if (process.env.npm_config_progress === 'true') {
-          var length = parseInt(response.headers['content-length'], 10);
-          var progress = log.newItem('', length);
+          var length = parseInt(response.headers['content-length'], 10)
+          var progress = log.newItem('', length)
 
-          log.enableProgress();
+          log.enableProgress()
 
           response.data.on('data', (chunk) => progress.completeWork(chunk.length))
           response.data.on('end', progress.finish)
@@ -69,8 +67,8 @@ const fetch = (url, dest) => {
 const verify = (path) => {
   debug('fetch: %o', { path })
 
-  function getKeyByValue(object, value) {
-    return Object.keys(object).find(key => object[key] === value);
+  function getKeyByValue (object, value) {
+    return Object.keys(object).find(key => object[key] === value)
   }
 
   const checksums = manifest[lnd.getBinaryVersion()]
@@ -79,20 +77,20 @@ const verify = (path) => {
   debug('Verifying archive against checksum', checksum)
 
   return hasha.fromFile(path, { algorithm: 'sha256' })
-  .then(hash => {
-    debug('Generated hash from downloaded file', hash)
+    .then(hash => {
+      debug('Generated hash from downloaded file', hash)
 
-    if (checksum === hash) {
-      log.info(pkg.name, 'Verified checksum of downloaded file')
-      return path
-    }
-    log.error(pkg.name, 'Checksum did not match')
-    return Promise.reject(new Error('Checksum did not match'))
-  })
-  .catch(err => {
-    log.error(pkg.name, 'Error verifying checksum of downloaded file', err)
-    return Promise.reject(err)
-  })
+      if (checksum === hash) {
+        log.info(pkg.name, 'Verified checksum of downloaded file')
+        return path
+      }
+      log.error(pkg.name, 'Checksum did not match')
+      return Promise.reject(new Error('Checksum did not match'))
+    })
+    .catch(err => {
+      log.error(pkg.name, 'Error verifying checksum of downloaded file', err)
+      return Promise.reject(err)
+    })
 }
 
 // Extract the archive.
@@ -131,8 +129,7 @@ const extract = (archive, dest) => {
         .pipe(unzip.Extract({ path: archiveDir }))
         .on('finish', () => moveToDest(resolve))
         .on('error', reject)
-    }
-    else {
+    } else {
       stream
         .pipe(gunzip())
         .pipe(tar.extract(archiveDir))
@@ -144,19 +141,18 @@ const extract = (archive, dest) => {
 
 // Cache the archive.
 const cache = (binaryPath, cachePath) => {
-
   debug('extract: %o', { binaryPath, cachePath })
   if (!cachePath) {
     return Promise.resolve()
   }
 
   return new Promise((resolve, reject) => {
-    const cachedBinary = path.join(cachePath, lnd.getBinaryName());
+    const cachedBinary = path.join(cachePath, lnd.getBinaryName())
 
-    debug('cachedBinary: %o', cachedBinary )
+    debug('cachedBinary: %o', cachedBinary)
 
     try {
-      mkdir.sync(path.dirname(cachedBinary));
+      mkdir.sync(path.dirname(cachedBinary))
       fs.createReadStream(binaryPath)
         .pipe(fs.createWriteStream(cachedBinary, { mode: 0o755 }))
         .on('finish', () => {
@@ -164,7 +160,7 @@ const cache = (binaryPath, cachePath) => {
           resolve()
         })
         .on('error', function (err) {
-          log.error(pkg.name, 'Failed to cache binary:', err);
+          log.error(pkg.name, 'Failed to cache binary:', err)
           reject(err)
         })
     } catch (err) {
@@ -195,16 +191,16 @@ const fetchVerifyAndExtract = (url, tmpDir, dest) => {
  * @api private
  */
 
-function checkAndDownloadBinary(cb) {
+function checkAndDownloadBinary (cb) {
   if (process.env.SKIP_LND_BINARY_DOWNLOAD_FOR_CI) {
-    log.info(pkg.name, 'Skipping downloading binaries on CI builds');
-    return;
+    log.info(pkg.name, 'Skipping downloading binaries on CI builds')
+    return
   }
 
-  //Environment Variables || Args || Defaults
-  version = lnd.getBinaryVersion()
-  platform = lnd.getBinaryPlatform()
-  arch = lnd.getBinaryArch()
+  // Environment Variables || Args || Defaults
+  const version = lnd.getBinaryVersion()
+  const platform = lnd.getBinaryPlatform()
+  const arch = lnd.getBinaryArch()
 
   // Make sure we support the requested package
   try {
@@ -214,28 +210,26 @@ function checkAndDownloadBinary(cb) {
     return cb(err)
   }
 
-  var cachedBinary = lnd.getCachedBinary(),
-    cachePath = lnd.getBinaryCachePath(),
-    binaryPath = lnd.getBinaryPath(),
-    binaryDir = lnd.getBinaryDir();
+  const cachedBinary = lnd.getCachedBinary()
+  const binaryPath = lnd.getBinaryPath()
 
   // Create the destination directory.
   try {
-    mkdir.sync(path.dirname(binaryPath));
+    mkdir.sync(path.dirname(binaryPath))
   } catch (err) {
-    const error = new Error('Unable to save binary', path.dirname(binaryPath), ':', err);
+    const error = new Error('Unable to save binary', path.dirname(binaryPath), ':', err)
     log.error(pkg.name, error.message)
-    return cb(error);
+    return cb(error)
   }
 
   // Attempt to restore binary from cache.
   if (cachedBinary) {
-    log.info(pkg.name, 'Cached binary found at', cachedBinary);
-    fs.createReadStream(cachedBinary).pipe(fs.createWriteStream(binaryPath, { mode: 0o755 }));
+    log.info(pkg.name, 'Cached binary found at', cachedBinary)
+    fs.createReadStream(cachedBinary).pipe(fs.createWriteStream(binaryPath, { mode: 0o755 }))
     return cb(null, {
       fileName: lnd.getBinaryName(),
-      installPath: path.dirname(binaryPath),
-    });
+      installPath: path.dirname(binaryPath)
+    })
   }
 
   return cacache.tmp.withTmp(lnd.getTmpDir(), { tmpPrefix: 'lnd-downloads' }, (tmpDir) => {
@@ -243,7 +237,7 @@ function checkAndDownloadBinary(cb) {
   })
     .then(() => cb(null, {
       fileName: lnd.getBinaryName(),
-      installPath: path.dirname(binaryPath),
+      installPath: path.dirname(binaryPath)
     }))
     .catch(err => log.error(pkg.name, err))
 }
@@ -253,7 +247,7 @@ function checkAndDownloadBinary(cb) {
  */
 
 if (require.main === module) {
-  checkAndDownloadBinary(() => {});
+  checkAndDownloadBinary(() => {})
 }
 
 // module.exports.download = download

@@ -1,6 +1,6 @@
 1. Document all functions
-2. Lint all code
-3. Transpile with babel
-4. Implement semantic-version
-5. Implement code coverage reports
-6. Support unsupported releases
+1. Transpile with babel
+1. Implement semantic-version
+1. Implement code coverage reports
+1. Support unsupported releases
+1. pass download options to axios

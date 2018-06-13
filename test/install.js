@@ -5,7 +5,6 @@ const fs = require('fs')
 const path = require('path')
 const rimraf = require('rimraf')
 const goenv = require('go-platform')
-const pkg = require('./../package.json')
 const checkAndDownloadBinary = require('../scripts/install').checkAndDownloadBinary
 
 const version = 'v0.4.2-beta'

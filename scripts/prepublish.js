@@ -2,16 +2,16 @@
  * node-lnd: scripts/prepublish.js
  */
 
-var path = require('path'),
-  rimraf = require('rimraf');
+const path = require('path')
+const rimraf = require('rimraf')
 
-function prepublish() {
-  var vendorPath = path.resolve(__dirname, '..', 'vendor');
-  rimraf.sync(vendorPath);
+function prepublish () {
+  var vendorPath = path.resolve(__dirname, '..', 'vendor')
+  rimraf.sync(vendorPath)
 }
 
 /**
  * Run
  */
 
-prepublish();
+prepublish()

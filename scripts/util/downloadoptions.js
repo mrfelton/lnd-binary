@@ -1,5 +1,5 @@
-var proxy = require('./proxy'),
-  userAgent = require('./useragent');
+const proxy = require('./proxy')
+const userAgent = require('./useragent')
 
 /**
  * The options passed to request when downloading the bibary
@@ -12,20 +12,20 @@ var proxy = require('./proxy'),
  * @return {Object} an options object for request
  * @api private
  */
-module.exports = function() {
+module.exports = function () {
   var options = {
     rejectUnauthorized: false,
     timeout: 60000,
     headers: {
-      'User-Agent': userAgent(),
+      'User-Agent': userAgent()
     },
-    encoding: null,
-  };
-
-  var proxyConfig = proxy();
-  if (proxyConfig) {
-    options.proxy = proxyConfig;
+    encoding: null
   }
 
-  return options;
-};
+  var proxyConfig = proxy()
+  if (proxyConfig) {
+    options.proxy = proxyConfig
+  }
+
+  return options
+}
