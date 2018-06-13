@@ -5,7 +5,7 @@
 const path = require('path')
 const rimraf = require('rimraf')
 
-function prepublish () {
+function prepublish() {
   var vendorPath = path.resolve(__dirname, '..', 'vendor')
   rimraf.sync(vendorPath)
 }

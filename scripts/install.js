@@ -27,47 +27,46 @@ const fetch = (url, dest) => {
   return axios({
     method: 'get',
     url,
-    responseType: 'stream'
-  })
-    .then((response) => {
-      // return a promise and resolve when download finishes
-      return new Promise((resolve, reject) => {
-        // Pipe the data into a temporary file.
-        const tmpFile = path.join(dest, path.basename(url))
-        debug('writing data to file: %s', tmpFile)
-        response.data.pipe(fs.createWriteStream(tmpFile))
+    responseType: 'stream',
+  }).then(response => {
+    // return a promise and resolve when download finishes
+    return new Promise((resolve, reject) => {
+      // Pipe the data into a temporary file.
+      const tmpFile = path.join(dest, path.basename(url))
+      debug('writing data to file: %s', tmpFile)
+      response.data.pipe(fs.createWriteStream(tmpFile))
 
-        // The `progress` is true by default. However if it has not
-        // been explicitly set it's `undefined` which is considered
-        // as far as npm is concerned.
-        if (process.env.npm_config_progress === 'true') {
-          var length = parseInt(response.headers['content-length'], 10)
-          var progress = log.newItem('', length)
+      // The `progress` is true by default. However if it has not
+      // been explicitly set it's `undefined` which is considered
+      // as far as npm is concerned.
+      if (process.env.npm_config_progress === 'true') {
+        var length = parseInt(response.headers['content-length'], 10)
+        var progress = log.newItem('', length)
 
-          log.enableProgress()
+        log.enableProgress()
 
-          response.data.on('data', (chunk) => progress.completeWork(chunk.length))
-          response.data.on('end', progress.finish)
-        }
+        response.data.on('data', chunk => progress.completeWork(chunk.length))
+        response.data.on('end', progress.finish)
+      }
 
-        response.data.on('end', () => {
-          debug('Download complete')
-          resolve(tmpFile)
-        })
+      response.data.on('end', () => {
+        debug('Download complete')
+        resolve(tmpFile)
+      })
 
-        response.data.on('error', err => {
-          debug('Download error')
-          reject(err)
-        })
+      response.data.on('error', err => {
+        debug('Download error')
+        reject(err)
       })
     })
+  })
 }
 
 // Verify the binary archive.
-const verify = (path) => {
+const verify = path => {
   debug('fetch: %o', { path })
 
-  function getKeyByValue (object, value) {
+  function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value)
   }
 
@@ -76,7 +75,8 @@ const verify = (path) => {
 
   debug('Verifying archive against checksum', checksum)
 
-  return hasha.fromFile(path, { algorithm: 'sha256' })
+  return hasha
+    .fromFile(path, { algorithm: 'sha256' })
     .then(hash => {
       debug('Generated hash from downloaded file', hash)
 
@@ -159,7 +159,7 @@ const cache = (binaryPath, cachePath) => {
           log.info(pkg.name, 'Cached binary to', cachedBinary)
           resolve()
         })
-        .on('error', function (err) {
+        .on('error', function(err) {
           log.error(pkg.name, 'Failed to cache binary:', err)
           reject(err)
         })
@@ -171,7 +171,7 @@ const cache = (binaryPath, cachePath) => {
 }
 
 const fetchVerifyAndExtract = (url, tmpDir, dest) => {
-  debug('fetchVerifyAndExtract %o', {url, tmpDir, dest})
+  debug('fetchVerifyAndExtract %o', { url, tmpDir, dest })
   return fetch(url, tmpDir)
     .then(verify)
     .then(() => {
@@ -191,7 +191,7 @@ const fetchVerifyAndExtract = (url, tmpDir, dest) => {
  * @api private
  */
 
-function checkAndDownloadBinary (cb) {
+function checkAndDownloadBinary(cb) {
   if (process.env.SKIP_LND_BINARY_DOWNLOAD_FOR_CI) {
     log.info(pkg.name, 'Skipping downloading binaries on CI builds')
     return
@@ -228,17 +228,20 @@ function checkAndDownloadBinary (cb) {
     fs.createReadStream(cachedBinary).pipe(fs.createWriteStream(binaryPath, { mode: 0o755 }))
     return cb(null, {
       fileName: lnd.getBinaryName(),
-      installPath: path.dirname(binaryPath)
+      installPath: path.dirname(binaryPath),
     })
   }
 
-  return cacache.tmp.withTmp(lnd.getTmpDir(), { tmpPrefix: 'lnd-downloads' }, (tmpDir) => {
-    return fetchVerifyAndExtract(lnd.getBinaryUrl(), tmpDir, binaryPath)
-  })
-    .then(() => cb(null, {
-      fileName: lnd.getBinaryName(),
-      installPath: path.dirname(binaryPath)
-    }))
+  return cacache.tmp
+    .withTmp(lnd.getTmpDir(), { tmpPrefix: 'lnd-downloads' }, tmpDir => {
+      return fetchVerifyAndExtract(lnd.getBinaryUrl(), tmpDir, binaryPath)
+    })
+    .then(() =>
+      cb(null, {
+        fileName: lnd.getBinaryName(),
+        installPath: path.dirname(binaryPath),
+      }),
+    )
     .catch(err => log.error(pkg.name, err))
 }
 

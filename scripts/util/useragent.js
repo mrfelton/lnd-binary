@@ -5,9 +5,6 @@ var pkg = require('../../package.json')
  *
  * @api private
  */
-module.exports = function () {
-  return [
-    'node/', process.version, ' ',
-    'node-lnd-installer/', pkg.version
-  ].join('')
+module.exports = function() {
+  return ['node/', process.version, ' ', 'node-lnd-installer/', pkg.version].join('')
 }
