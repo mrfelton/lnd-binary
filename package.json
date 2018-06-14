@@ -8,7 +8,6 @@
     "npm": ">=4.0.0"
   },
   "scripts": {
-    "install": "node ./dist/bin/lnd-install",
     "test": "babel-tape-runner test/*.js | tap-spec",
     "lint": "prettier-eslint --write \"./**/*.{js,json,md}\"",
     "build-src": "babel src --out-dir dist",
@@ -16,10 +15,11 @@
     "build-lnd-install-bin": "mkdir -p dist/bin && babel src/bin/lnd-install --out-file dist/bin/lnd-install && chmod +xx dist/bin/lnd-install",
     "build": "npm run build-src && npm run build-lnd-bin && npm run build-lnd-install-bin",
     "preversion": "npm test",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "postinstall": "postinstall-build dist && node ./dist/bin/lnd-install"
   },
   "files": [
-    "bin",
+    ".babelrc",
     "dist",
     "lib"
   ],
@@ -45,6 +45,7 @@
     "gunzip-maybe": "^1.4.1",
     "hasha": "^3.0.0",
     "npmlog": "^4.1.2",
+    "postinstall-build": "^5.0.1",
     "tar-fs": "^1.16.2",
     "true-case-path": "^1.0.2",
     "unzip-stream": "^0.3.0"
@@ -74,5 +75,10 @@
     "tap-spec": "^5.0.0",
     "tape": "^4.9.0",
     "tape-promise": "^3.0.0"
-  }
+  },
+  "buildDependencies": [
+    "babel-cli",
+    "babel-plugin-add-module-exports",
+    "babel-preset-env"
+  ]
 }

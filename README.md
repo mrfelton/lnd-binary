@@ -3,6 +3,7 @@
 [![](https://img.shields.io/badge/project-LND-blue.svg?style=flat-square)](https://github.com/lightningnetwork/lnd)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 [![Dependency Status](https://david-dm.org/mrfelton/lnd-binary.svg?style=flat-square)](https://david-dm.org/mrfelton/lnd-binary)
+[![Build Status](https://travis-ci.org/mrfelton/lnd-binary.svg?branch=master)](https://travis-ci.org/mrfelton/lnd-binary)
 
 > install lnd from npm https://github.com/lightningnetwork/lnd ⚡️
 
