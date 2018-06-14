@@ -20,6 +20,7 @@
   },
   "files": [
     ".babelrc",
+    "config",
     "dist",
     "lib"
   ],
