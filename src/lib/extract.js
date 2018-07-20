@@ -36,7 +36,7 @@ export const extract = (archive, dest) => {
       log.error(error)
       return cb(error)
     }
-    fs.renameSync(downloadedLndBinary, dest)
+    fs.copyFileSync(downloadedLndBinary, dest)
     log.info(pkg.name, 'Moved lnd binary to', dest)
     return cb()
   }
