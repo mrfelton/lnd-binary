@@ -1,6 +1,6 @@
 {
   "name": "lnd-binary",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Download the latest lnd binary",
   "main": "./dist/bin/lnd",
   "engines": {
