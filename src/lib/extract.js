@@ -45,7 +45,7 @@ export const extract = (archive, dest) => {
     if (isWindows) {
       stream
         .pipe(unzip.Extract({ path: archiveDir }))
-        .on('finish', () => moveToDest(resolve))
+        .on('close', () => moveToDest(resolve))
         .on('error', reject)
     } else {
       stream
