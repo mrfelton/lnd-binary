@@ -1,13 +1,8 @@
-import lnd from './lib/extensions'
-
-/**
- * The version of lnd installed by this package.
- * @type {number}
- */
-exports.version = lnd.getBinaryVersion()
-
-/**
- * The location of the lnd binary installed by this package.
- * @type {number}
- */
-exports.path = lnd.getBinaryPath()
+export { cache } from './lib/cache'
+export { config } from './lib/config'
+export { extensions } from './lib/extensions'
+export { extract } from './lib/extract'
+export { fetch } from './lib/fetch'
+export { install } from './lib/install'
+export { support } from './lib/support'
+export { verify } from './lib/verify'
