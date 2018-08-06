@@ -19,8 +19,13 @@ export const verify = filepath => {
   const manifestPath = path.join(__dirname, '..', '..', 'config', 'manifest.json')
   const manifest = fs.readJsonSync(manifestPath)
   const checksums = manifest[lnd.getBinaryVersion()]
-  const checksum = getKeyByValue(checksums, lnd.getBinaryName() + lnd.getBinaryExtension())
 
+  if (!checksums) {
+    log.warn(`Checksum for ${lnd.getBinaryVersion()} unknown. Unable to verify release.`)
+    return Promise.resolve()
+  }
+
+  const checksum = getKeyByValue(checksums, lnd.getBinaryName() + lnd.getBinaryExtension())
   debug('Verifying archive against checksum', checksum)
 
   return hasha

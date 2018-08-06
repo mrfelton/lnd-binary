@@ -1,3 +1,6 @@
+import log from 'npmlog'
+import * as pkg from '../../package.json'
+
 // The packages we support
 const supportedPlatforms = ['linux', 'darwin', 'windows', 'freebsd']
 const supportedArchs = ['amd64', '386', 'arm']
@@ -16,15 +19,15 @@ function isWindows(os) {
 // Validate the requested binary support, throw en error if not supported
 function verify(version, platform, arch) {
   if (!isSupportedArch(arch)) {
-    throw new Error(`No binary available for arch '${arch}'`)
+    log.warn(pkg.name, `Arch '${arch}' is not an officially supported architecture`)
   }
 
   if (!isSupportedPlatform(platform)) {
-    throw new Error(`No binary available for platform '${platform}'`)
+    log.warn(pkg.name, `Platform '${platform}' is not an officially supported platform`)
   }
 
   if (!isSupportedVersion(version)) {
-    throw new Error(`Version '${version}' not available`)
+    log.warn(pkg.name, `Version '${version}' not an officially supported lnd version`)
   }
 
   return true
