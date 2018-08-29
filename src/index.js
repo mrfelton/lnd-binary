@@ -1,6 +1,6 @@
 export { cache } from './lib/cache'
 export { config } from './lib/config'
-export { extensions } from './lib/extensions'
+export { default as extensions } from './lib/extensions'
 export { extract } from './lib/extract'
 export { fetch } from './lib/fetch'
 export { install } from './lib/install'
