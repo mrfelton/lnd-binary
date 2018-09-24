@@ -4,7 +4,7 @@ import * as pkg from '../../package.json'
 // The packages we support
 const supportedPlatforms = ['linux', 'darwin', 'windows', 'freebsd']
 const supportedArchs = ['amd64', '386', 'arm']
-const supportedVersions = ['0.4.2-beta', '0.4.1-beta', '0.4-beta', '0.3-alpha', '0.2.1-alpha', '0.2-alpha']
+const supportedVersions = ['0.5-beta', '0.4.2-beta', '0.4.1-beta', '0.4-beta', '0.3-alpha', '0.2.1-alpha', '0.2-alpha']
 
 // Check functions
 const isSupportedVersion = version => supportedVersions.indexOf(version) !== -1
