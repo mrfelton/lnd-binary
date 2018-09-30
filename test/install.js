@@ -14,7 +14,7 @@ test('Ensure lnd gets downloaded (current version and platform)', t => {
 
   const platform = goenv.GOOS
   const arch = goenv.GOARCH
-  const version = 'v0.4.2-beta'
+  const version = 'v0.5-beta'
 
   return (
     install()
@@ -44,7 +44,7 @@ test('Ensure Windows version gets downloaded', t => {
   process.env.LND_BINARY_PLATFORM = 'windows'
   const platform = 'windows'
   const arch = goenv.GOARCH
-  const version = 'v0.4.2-beta'
+  const version = 'v0.5-beta'
 
   return (
     install()
@@ -74,7 +74,7 @@ test('Ensure Linux version gets downloaded', t => {
   process.env.LND_BINARY_PLATFORM = 'linux'
   const platform = 'linux'
   const arch = goenv.GOARCH
-  const version = 'v0.4.2-beta'
+  const version = 'v0.5-beta'
 
   return (
     install()
@@ -104,7 +104,7 @@ test('Ensure OSX version gets downloaded', t => {
   process.env.LND_BINARY_PLATFORM = 'darwin'
   const platform = 'darwin'
   const arch = goenv.GOARCH
-  const version = 'v0.4.2-beta'
+  const version = 'v0.5-beta'
 
   return (
     install()
