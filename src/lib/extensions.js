@@ -7,6 +7,8 @@ import support from './support'
 import { config } from './config'
 import * as pkg from '../../package.json'
 
+export const DEFAULT_BINARY_URL = 'https://github.com/lightningnetwork/lnd/releases/download'
+
 /**
  * Get the value of a CLI argument
  *
@@ -191,7 +193,7 @@ function getBinaryUrl() {
     process.env.LND_BINARY_SITE ||
     process.env.npm_config_lnd_binary_site ||
     (config && config.binarySite) ||
-    'https://github.com/lightningnetwork/lnd/releases/download'
+    DEFAULT_BINARY_URL
 
   return [site, 'v' + getBinaryVersion(), getBinaryName()].join('/') + getBinaryExtension()
 }

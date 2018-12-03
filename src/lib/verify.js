@@ -2,7 +2,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import hasha from 'hasha'
 import log from 'npmlog'
-import lnd from '../lib/extensions'
+import lnd, { DEFAULT_BINARY_URL } from '../lib/extensions'
 import * as pkg from '../../package.json'
 import createDebug from 'debug'
 
@@ -19,6 +19,11 @@ export const verify = filepath => {
   const manifestPath = path.join(__dirname, '..', '..', 'config', 'manifest.json')
   const manifest = fs.readJsonSync(manifestPath)
   const checksums = manifest[lnd.getBinaryVersion()]
+
+  if (lnd.getBinaryUrl() !== DEFAULT_BINARY_URL) {
+    log.warn(`Skipping checksum validation. Unknown binary site.`)
+    return Promise.resolve()
+  }
 
   if (!checksums) {
     log.warn(`Checksum for ${lnd.getBinaryVersion()} unknown. Unable to verify release.`)
