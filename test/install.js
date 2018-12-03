@@ -7,6 +7,7 @@ import goenv from 'go-platform'
 import { install } from '../src/lib/install'
 
 const dir = path.resolve(__dirname, '..', 'vendor')
+const VERSION = 'v0.5.1-beta'
 
 test('Ensure lnd gets downloaded (current version and platform)', t => {
   t.plan(4)
@@ -14,13 +15,12 @@ test('Ensure lnd gets downloaded (current version and platform)', t => {
 
   const platform = goenv.GOOS
   const arch = goenv.GOARCH
-  const version = 'v0.5-beta'
 
   return (
     install()
       // Check return values.
       .then(res => {
-        t.ok(res.fileName.indexOf(`lnd-${platform}-${arch}-${version}`) !== -1, 'Returns the correct filename')
+        t.ok(res.fileName.indexOf(`lnd-${platform}-${arch}-${VERSION}`) !== -1, 'Returns the correct filename')
         t.ok(res.installPath === path.resolve(path.join(__dirname, '..', 'vendor')), 'Returns the correct output path')
       })
 
@@ -44,13 +44,12 @@ test('Ensure Windows version gets downloaded', t => {
   process.env.LND_BINARY_PLATFORM = 'windows'
   const platform = 'windows'
   const arch = goenv.GOARCH
-  const version = 'v0.5-beta'
 
   return (
     install()
       // Check return values.
       .then(res => {
-        t.ok(res.fileName.indexOf(`lnd-${platform}-${arch}-${version}`) !== -1, 'Returns the correct filename')
+        t.ok(res.fileName.indexOf(`lnd-${platform}-${arch}-${VERSION}`) !== -1, 'Returns the correct filename')
         t.ok(res.installPath === path.resolve(path.join(__dirname, '..', 'vendor')), 'Returns the correct output path')
       })
 
@@ -74,13 +73,12 @@ test('Ensure Linux version gets downloaded', t => {
   process.env.LND_BINARY_PLATFORM = 'linux'
   const platform = 'linux'
   const arch = goenv.GOARCH
-  const version = 'v0.5-beta'
 
   return (
     install()
       // Check return values.
       .then(res => {
-        t.ok(res.fileName.indexOf(`lnd-${platform}-${arch}-${version}`) !== -1, 'Returns the correct filename')
+        t.ok(res.fileName.indexOf(`lnd-${platform}-${arch}-${VERSION}`) !== -1, 'Returns the correct filename')
         t.ok(res.installPath === path.resolve(path.join(__dirname, '..', 'vendor')), 'Returns the correct output path')
       })
 
@@ -104,13 +102,12 @@ test('Ensure OSX version gets downloaded', t => {
   process.env.LND_BINARY_PLATFORM = 'darwin'
   const platform = 'darwin'
   const arch = goenv.GOARCH
-  const version = 'v0.5-beta'
 
   return (
     install()
       // Check return values.
       .then(res => {
-        t.ok(res.fileName.indexOf(`lnd-${platform}-${arch}-${version}`) !== -1, 'Returns the correct filename')
+        t.ok(res.fileName.indexOf(`lnd-${platform}-${arch}-${VERSION}`) !== -1, 'Returns the correct filename')
         t.ok(res.installPath === path.resolve(path.join(__dirname, '..', 'vendor')), 'Returns the correct output path')
       })
 
