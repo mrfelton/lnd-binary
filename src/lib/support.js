@@ -5,6 +5,7 @@ import * as pkg from '../../package.json'
 const supportedPlatforms = ['linux', 'darwin', 'windows', 'freebsd']
 const supportedArchs = ['amd64', '386', 'arm']
 const supportedVersions = [
+  '0.6.1-beta',
   '0.6-beta',
   '0.5.2-beta',
   '0.5.1-beta',
