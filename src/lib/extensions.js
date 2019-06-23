@@ -160,6 +160,22 @@ function getBinaryFileExtension() {
 }
 
 /**
+ * Get binary site.
+ * Site to download binary from.
+ *
+ * @api public
+ */
+function getBinarySite() {
+  return (
+    getArgument('--lnd-binary-site') ||
+    process.env.LND_BINARY_SITE ||
+    process.env.npm_config_lnd_binary_site ||
+    (config && config.binarySite) ||
+    DEFAULT_BINARY_URL
+  )
+}
+
+/**
  * Determine the URL to fetch binary file from.
  * By default fetch from the node-lnd distribution
  * site on GitHub.
@@ -188,12 +204,7 @@ function getBinaryFileExtension() {
  */
 
 function getBinaryUrl() {
-  var site =
-    getArgument('--lnd-binary-site') ||
-    process.env.LND_BINARY_SITE ||
-    process.env.npm_config_lnd_binary_site ||
-    (config && config.binarySite) ||
-    DEFAULT_BINARY_URL
+  var site = getBinarySite()
 
   return [site, 'v' + getBinaryVersion(), getBinaryName()].join('/') + getBinaryExtension()
 }
@@ -381,6 +392,7 @@ function getPlatformVariant() {
 
 // Public API
 export default {
+  getBinarySite,
   getBinaryUrl,
   getBinaryName,
   getBinaryPlatform,

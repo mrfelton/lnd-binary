@@ -20,7 +20,7 @@ export const verify = filepath => {
   const manifest = fs.readJsonSync(manifestPath)
   const checksums = manifest[lnd.getBinaryVersion()]
 
-  if (lnd.getBinaryUrl() !== DEFAULT_BINARY_URL) {
+  if (lnd.getBinarySite() !== DEFAULT_BINARY_URL) {
     log.warn(`Skipping checksum validation. Unknown binary site.`)
     return Promise.resolve()
   }
