@@ -1,4 +1,27 @@
 {
+  "0.7.1-beta": {
+    "e4e347076f924c0b9800ca6ebe534ddc3994054df129ad55e14590a958a17825": "lnd-darwin-386-v0.7.1-beta.tar.gz",
+    "bd2ce2df54d08df4e2c48ec26954946a1e05e2385efce2d40fbe952b20e237f3": "lnd-darwin-amd64-v0.7.1-beta.tar.gz",
+    "f2e3b6a7bc4b1725fa81c6795919aad39c363cdb18763974a2691934f13809d4": "lnd-dragonfly-amd64-v0.7.1-beta.tar.gz",
+    "57021bdab4693b16c7bc5afcbcde4ed31edebb1e0f4a4b1fa327d337f4001bd0": "lnd-freebsd-386-v0.7.1-beta.tar.gz",
+    "95d263659a39e891986b121924c6c701218a390ecb04fb6898466b2f3da844af": "lnd-freebsd-amd64-v0.7.1-beta.tar.gz",
+    "6c16d14d5514093ff9495c5ad56ccd2fea1585a38ed8ee078d75ce9838d4c8f7": "lnd-freebsd-arm-v0.7.1-beta.tar.gz",
+    "273c21b7a6900ca91f3f09a9d8753cb0c0a549d8ac81fdc3748c1292141b5133": "lnd-linux-386-v0.7.1-beta.tar.gz",
+    "8a7dcf0cdb1c3dda1f9936625f74644ee0b58940970f2025935590952be8d7ba": "lnd-linux-amd64-v0.7.1-beta.tar.gz",
+    "755c505c48af1531f784cbff1fa62424c7831698433889680fd2f6030fc15f76": "lnd-linux-arm64-v0.7.1-beta.tar.gz",
+    "afd3384adaf1adf7545ae7c47cf274532b5cda8cab547c2cc6fc65d21a52d231": "lnd-linux-armv6-v0.7.1-beta.tar.gz",
+    "a8c5199fdad4a900ce2dc70d9de08e303235e796bf960d1a07f803f837c086da": "lnd-linux-armv7-v0.7.1-beta.tar.gz",
+    "f657f914bc9a5fd4ebaa65ee4e94fac03e8b03fe59e193972e1038b4b9399388": "lnd-linux-mips64-v0.7.1-beta.tar.gz",
+    "e1d7133e27be8507381357f3478f1aadcb4d328e446a1981e3f2427739fc2bb1": "lnd-linux-mips64le-v0.7.1-beta.tar.gz",
+    "b7b43f4bce9738d28d60b79f57778fb14b6180eeed9f3f731a3b7bd4169834cf": "lnd-linux-ppc64-v0.7.1-beta.tar.gz",
+    "366516b68d9e49775429ecd6c1971a2940c4c3e84421f59966342b45a44c5cf4": "lnd-netbsd-386-v0.7.1-beta.tar.gz",
+    "eb9c83dca69696d195a5b98059f8aefb61e4522411ebc988bf25940adda6b570": "lnd-netbsd-amd64-v0.7.1-beta.tar.gz",
+    "e7e70a835d4358e7357b19f857eb8ed2e05b3bf392aa0201016ac0e6282f4585": "lnd-openbsd-386-v0.7.1-beta.tar.gz",
+    "10b0866377ef7452da4097596aa03afc42fcd2c037a3255e8e402a0bc04a1eea": "lnd-openbsd-amd64-v0.7.1-beta.tar.gz",
+    "ae8cb77eb7567ed9f8041a17eb6f65280cf81f4fbc3bf10eb671a423f62fc948": "lnd-source-v0.7.1-beta.tar.gz",
+    "b68357ffd9d9527d04cb7d16534998711bca5948d7704c1439437c993f68b555": "lnd-windows-386-v0.7.1-beta.zip",
+    "249378747307d7dff0d5da9b0ef8acc14908d18d4b5adddc68a66939432f4770": "lnd-windows-amd64-v0.7.1-beta.zip"
+  },
   "0.7.0-beta": {
     "f8452608ff2e3ca6a0327c830f2fee5e837b5a39e0bf7cedd190857a5b8894f8": "lnd-darwin-386-v0.7.0-beta.tar.gz",
     "57a2eef7c337dbad6bbdc2bdffe459292d34ce354b58d74e74b329753dc134c8": "lnd-darwin-amd64-v0.7.0-beta.tar.gz",
