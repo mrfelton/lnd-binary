@@ -38,7 +38,7 @@
     "url": "git+https://github.com/mrfelton/lnd-binary.git"
   },
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "cacache": "^15.0.5",
     "debug": "^4.1.1",
     "find-config": "^1.0.0",
