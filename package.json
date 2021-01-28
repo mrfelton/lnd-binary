@@ -73,6 +73,7 @@
     "babel-tape-runner": "^3.0.0",
     "eslint": "^7.9.0",
     "eslint-config-prettier": "^6.11.0",
+    "lnd-binary": "0.3.18",
     "prettier": "^2.1.2",
     "prettier-eslint": "^11.0.0",
     "prettier-eslint-cli": "^5.0.0",
