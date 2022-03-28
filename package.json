@@ -1,6 +1,6 @@
 {
   "name": "lnd-binary",
-  "version": "0.3.24",
+  "version": "0.3.25",
   "description": "Download the latest lnd binary",
   "main": "./dist/index.js",
   "engines": {
