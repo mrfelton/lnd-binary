@@ -7,7 +7,7 @@ import goenv from 'go-platform'
 import { install } from '../src/lib/install'
 
 const dir = path.resolve(__dirname, '..', 'vendor')
-const VERSION = 'v0.14.3-beta'
+const VERSION = 'v0.14.4-beta'
 
 test('Ensure lnd gets downloaded (current version and platform)', (t) => {
   t.plan(4)
