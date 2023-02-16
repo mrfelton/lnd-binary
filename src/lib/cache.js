@@ -27,7 +27,7 @@ export const cache = (binaryPath, cachePath) => {
           log.info(pkg.name, 'Cached binary to', cachedBinary)
           resolve()
         })
-        .on('error', function(err) {
+        .on('error', function (err) {
           log.error(pkg.name, 'Failed to cache binary:', err)
           reject(err)
         })

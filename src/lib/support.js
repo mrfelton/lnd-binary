@@ -8,9 +8,9 @@ const supportedArchs = ['amd64', '386', 'arm']
 const supportedVersions = Object.keys(manifest)
 
 // Check functions
-const isSupportedVersion = version => supportedVersions.indexOf(version) !== -1
-const isSupportedPlatform = platform => supportedPlatforms.indexOf(platform) !== -1
-const isSupportedArch = arch => supportedArchs.indexOf(arch) !== -1
+const isSupportedVersion = (version) => supportedVersions.indexOf(version) !== -1
+const isSupportedPlatform = (platform) => supportedPlatforms.indexOf(platform) !== -1
+const isSupportedArch = (arch) => supportedArchs.indexOf(arch) !== -1
 
 // Is the platform Windows?
 function isWindows(os) {

@@ -62,7 +62,7 @@ export const install = () => {
   }
 
   return cacache.tmp
-    .withTmp(lnd.getTmpDir(), { tmpPrefix: 'lnd-downloads' }, tmpDir => {
+    .withTmp(lnd.getTmpDir(), { tmpPrefix: 'lnd-downloads' }, (tmpDir) => {
       return fetch(binaryUrl, tmpDir)
         .then(verify)
         .then(() => {
@@ -79,5 +79,5 @@ export const install = () => {
       fileName: lnd.getBinaryName(),
       installPath: path.dirname(binaryPath),
     }))
-    .catch(err => log.error(pkg.name, err))
+    .catch((err) => log.error(pkg.name, err))
 }

@@ -5,6 +5,6 @@ import * as pkg from '../../../package.json'
  *
  * @api private
  */
-export const useragent = function() {
+export const useragent = function () {
   return ['node/', process.version, ' ', 'node-lnd-installer/', pkg.version].join('')
 }

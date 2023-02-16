@@ -23,7 +23,7 @@ export const fetch = (url, dest) => {
       },
       downloadoptions,
     ),
-  ).then(response => {
+  ).then((response) => {
     // return a promise and resolve when download finishes
     return new Promise((resolve, reject) => {
       // Pipe the data into a temporary file.
@@ -40,7 +40,7 @@ export const fetch = (url, dest) => {
 
         log.enableProgress()
 
-        response.data.on('data', chunk => progress.completeWork(chunk.length))
+        response.data.on('data', (chunk) => progress.completeWork(chunk.length))
         response.data.on('end', progress.finish)
       }
 
@@ -49,7 +49,7 @@ export const fetch = (url, dest) => {
         resolve(tmpFile)
       })
 
-      response.data.on('error', err => {
+      response.data.on('error', (err) => {
         debug('Download error')
         reject(err)
       })

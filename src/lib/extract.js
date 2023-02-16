@@ -21,7 +21,7 @@ export const extract = (archive, dest) => {
   const isWindows = support.isWindows(lnd.getBinaryPlatform())
   const stream = fs.createReadStream(archive)
 
-  const moveToDest = cb => {
+  const moveToDest = (cb) => {
     log.info(pkg.name, 'Extracted lnd archive to', archiveDir)
 
     // Make sure the binary is executable.

@@ -9,11 +9,11 @@ import createDebug from 'debug'
 const debug = createDebug(pkg.name)
 
 // Verify the binary archive.
-export const verify = filepath => {
+export const verify = (filepath) => {
   debug('verify: %o', { filepath })
 
   function getKeyByValue(object, value) {
-    return Object.keys(object).find(key => object[key] === value)
+    return Object.keys(object).find((key) => object[key] === value)
   }
 
   const manifestPath = path.join(__dirname, '..', '..', 'config', 'manifest.json')
@@ -35,7 +35,7 @@ export const verify = filepath => {
 
   return hasha
     .fromFile(filepath, { algorithm: 'sha256' })
-    .then(hash => {
+    .then((hash) => {
       debug('Generated hash from downloaded file', hash)
 
       if (checksum === hash) {
@@ -45,7 +45,7 @@ export const verify = filepath => {
       log.error(pkg.name, 'Checksum did not match')
       return Promise.reject(new Error('Checksum did not match'))
     })
-    .catch(err => {
+    .catch((err) => {
       log.error(pkg.name, 'Error verifying checksum of downloaded file', err)
       return Promise.reject(err)
     })

@@ -7,7 +7,7 @@ import useragent from './useragent'
  * @return {Object} an options object for request
  * @api private
  */
-export const downloadoptions = function() {
+export const downloadoptions = function () {
   var options = {
     timeout: 60000,
     headers: {
